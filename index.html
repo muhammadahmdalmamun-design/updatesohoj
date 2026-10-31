@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="bn"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2F6B1F">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>আপডেট সহজ</title>
+<style>
+:root{--bg:#F0F6E8;--sf:#fff;--tx:#14233A;--mu:#55657D;--ac:#3C7A1E;--ok:#1E8A4C;--bd:#CCD6E4;--go:#E3B04B}
+@media (prefers-color-scheme:dark){:root{--bg:#121C0B;--sf:#1B2433;--tx:#E8EEF6;--mu:#A9B8CC;--ac:#A6DB74;--ok:#6FCF97;--bd:#33425A}}
+*{box-sizing:border-box}html{scroll-padding-top:150px}body{margin:0;background:var(--bg);color:var(--tx);font-family:"Hind Siliguri","Noto Sans Bengali",system-ui,sans-serif;font-size:20px;line-height:1.7;padding:0 14px max(24px,env(safe-area-inset-bottom))}
+.w{max-width:560px;margin:0 auto}h1{font-size:1.45rem;margin:4px 0;line-height:1.4}.m{color:var(--mu);font-size:.95rem}
+.top{background:linear-gradient(135deg,#2F6B1F,#7BA428);color:#fff;margin:0 -14px;padding:max(14px,env(safe-area-inset-top)) 14px 12px;border-radius:0 0 24px 24px;position:sticky;top:0;z-index:5;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.top b{font-size:1.15rem}.fsb{display:inline-block;width:auto;padding:3px 12px;margin:4px 0 0;font-size:.85rem;font-weight:500;background:rgba(255,255,255,.2);color:#fff;border-radius:10px}.top .pc{float:right;font-size:1.6rem;font-weight:700;color:var(--go)}
+.pb{height:10px;background:rgba(255,255,255,.25);border-radius:8px;overflow:hidden;margin-top:8px}.pb i{display:block;height:100%;background:linear-gradient(90deg,#6FCF97,var(--go));transition:width .4s}
+.dots{display:flex;gap:5px;margin-top:8px}.dots span{flex:1;height:6px;border-radius:4px;background:rgba(255,255,255,.28)}.dots .d{background:#6FCF97}.dots .n{background:#fff}
+.c{background:var(--sf);border:2px solid var(--ac);border-radius:18px;padding:16px;margin:14px 0}
+.sb{border-radius:12px;padding:10px 12px;margin:8px 0;font-size:.98rem;white-space:pre-line}.sb em{display:block;font-style:normal;font-weight:700}.s1{background:#E3F4EA;color:#14532D}.s2{background:#FDE9E5;color:#7A1F14}.s3{background:#FFF4D6;color:#5A4306}
+button,a.b{display:block;width:100%;font:inherit;font-weight:700;border:0;border-radius:14px;padding:15px;margin-top:10px;cursor:pointer;text-align:center;text-decoration:none}
+button:focus-visible,a.b:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--go);outline-offset:2px}button:disabled{opacity:.45}
+.g{background:var(--ok);color:#fff;font-size:1.2rem}.s{background:transparent;color:var(--ac);border:2px solid var(--ac)}a.b{background:var(--ac);color:var(--bg)}.t{background:transparent;color:var(--mu);font-weight:500;font-size:.95rem;padding:8px}.on{background:var(--ac)!important;color:var(--bg)!important}
+input,textarea{width:100%;font:inherit;padding:11px;border:1px solid var(--bd);border-radius:10px;background:var(--sf);color:var(--tx);margin-top:6px}
+.bx{background:var(--sf);border:1px dashed var(--ac);border-radius:12px;padding:10px 12px;margin-top:10px}.cd{font-family:ui-monospace,monospace;font-size:.82rem;white-space:pre-wrap;word-break:break-all}
+.r{padding:7px 10px;margin:8px 0;border-radius:10px;font-size:.98rem}.ok{background:#E3F4EA;color:#14532D}.no{background:#FDE9E5;color:#7A1F14}.wn{background:#FFF4D6;color:#5A4306}
+label.k{display:flex;gap:10px;align-items:flex-start;margin-top:10px}label.k input{width:26px;height:26px;margin:4px 0 0;flex:none}iframe{width:100%;height:320px;border:1px solid var(--bd);border-radius:12px;background:#fff;margin-top:8px}
+@media (prefers-color-scheme:dark){.s1,.ok{background:#173B2A;color:#CDEFD9}.s2,.no{background:#43211C;color:#F6CFC8}.s3,.wn{background:#3A3010;color:#F2DFA0}}
+</style></head><body><div class="w">
+<div class="top"><span class="pc" id="pc"></span><b>🔄 আপডেট সহজ</b><div class="m" id="pt" style="color:#E4ECF7"></div><button id="fs" class="fsb">⛶ ফুল স্ক্রিন করুন</button><div class="pb"><i id="pi"></i></div><div class="dots" id="ds"></div></div>
+<div id="v"></div>
+<button class="t" id="bk">← আগের ধাপ</button>
+<p class="m">সংস্করণের নাম, Version code ও সাইট যাচাই সফটওয়্যার নিজে করে। ফাইল তোলা ও নতুন AAB বানানো আপনার কাজ। প্লে কনসোল ও PWABuilder-এর মেনু বদলাতে পারে।</p>
+</div>
+<script>
+var K="update-sohoj-v1";
+
+var D={},cur=0;
+try{D=JSON.parse(localStorage.getItem(K)||"{}")}catch(e){}
+function sv(){try{localStorage.setItem(K,JSON.stringify(D))}catch(e){}}
+function E(t,c,x){var d=document.createElement(t);if(c)d.className=c;if(x)d.textContent=x;return d}
+function bn(n){return String(n).replace(/\d/g,function(d){return"০১২৩৪৫৬৭৮৯"[d]})}
+function cp(b,t){try{navigator.clipboard.writeText(t).then(function(){b.textContent="✔ কপি হয়েছে"}).catch(function(){prompt("কপি করুন:",t)})}catch(e){prompt("কপি করুন:",t)}}
+function lk(t,u){var a=E("a","b",t);a.href=u;a.target="_blank";a.rel="noopener";return a}
+function dl(n,t,m){var u=URL.createObjectURL(new Blob([t],{type:m||"text/plain"})),a=document.createElement("a");a.href=u;a.download=n;document.body.appendChild(a);a.click();a.remove()}
+function inp(ph,key,fn){var i=E("input");i.placeholder=ph;i.value=D[key]||"";i.oninput=function(){D[key]=i.value.trim();sv();if(fn)fn(i)};return i}
+function st(c,k,t){var d=E("div","r "+k,t);c.appendChild(d);return d}
+function cb(c,t,get){var b=E("button","s","📋 "+t);b.onclick=function(){cp(b,get())};c.appendChild(b);return b}
+function sk(x){x=x.toLowerCase();return x.replace(/[^a-z0-9._-]/g,"")}
+
+
+var DONE="আপডেটের সব ধাপ শেষ। ফোনে অ্যাপ পুরোপুরি বন্ধ করে আবার খুলুন। একবারে না বদলালে আরেকবার করুন।";
+function nx(n){var m=/^(.*?)(\d+)$/.exec(n||"");return m?m[1]+(parseInt(m[2],10)+1):(n?n+"-2":"")}
+var S=[
+["❓ কী বদলিয়েছেন?","উত্তর অনুযায়ী কাজ কম বা বেশি হয়।","ভুল পথে গেলে অযথা সময় যায় বা আপডেট পৌঁছায় না।","✅ শুধু সাইটের লেখা বা ফিচার বদলালে নতুন AAB লাগে না। সাইট বদলালেই অ্যাপে বদলে যায়।\n✅ আইকন, নাম বা manifest বদলালে নতুন AAB লাগে।","CH"],
+["🔢 sw.js-এর সংস্করণ বাড়ান","এটা না বাড়ালে ফোন পুরোনো কপিই দেখাতে থাকে।","নতুন কাজ সাইটে থাকলেও ব্যবহারকারী দেখবে না।","✅ GitHub-এ sw.js খুলে প্রথম লাইনে var C=\"…\" এর ভেতরের নামটা বসান। নিচে এখনকার নাম লিখলে নতুন নাম সফটওয়্যার বানিয়ে দেয়।\n⛔ নাম না বদলিয়ে ফাইল তুলবেন না।","SW"],
+["⬆️ GitHub-এ ফাইল বদলান","নতুন ফাইল তুললেই সাইট বদলায়।","না তুললে সাইট পুরোনোই থাকবে।","✅ নিচে ইউজারনেম ও repository-র নাম দিলে সরাসরি তোলার পাতা খুলবে। একই নামের ফাইল তুললে পুরোনোটা বদলে যায়। শেষে Commit changes চাপুন।\n⛔ জিপ নয়, খোলা ফাইল তুলুন।","UG"],
+["🔎 সাইটে নতুন সংস্করণ এসেছে কি দেখুন","GitHub Pages-এ বদলাতে কয়েক মিনিট লাগতে পারে।","না দেখলে পুরোনো সংস্করণ নিয়ে ভুল ধারণা হবে।","✅ সাইটের লিংক বসান। সফটওয়্যার sw.js খুলে নতুন সংস্করণের নাম মেলায়। সবুজ হলে এগোন।\n⏳ লাল হলে এক-দুই মিনিট পর আবার চাপুন।","VS"],
+["🔼 Version code বাড়ান","প্লে কনসোল একই Version code দুইবার নেয় না।","না বাড়ালে নতুন AAB আপলোড হবে না।","✅ আগেরটা লিখুন, সফটওয়্যার নতুন সংখ্যা দেবে। PWABuilder-এ Package for stores → Android → Version code ঘরে সেটা বসান।\n⛔ কমাবেন না।","VC"],
+["🔑 আগের কী-ই ব্যবহার করুন","একই কী না হলে প্লে কনসোল আপডেট নেয় না।","নতুন কী দিলে আপডেট দেওয়া যাবে না।","✅ PWABuilder-এ Signing key-র ঘরে ‘Use mine’ বেছে আগের কী ফাইল ও পাসওয়ার্ড দিন। নিচে টিক দিন।\n⛔ ‘New’ বেছে নেবেন না।","KY"],
+["🚀 প্লে কনসোলে নতুন release দিন","এখান থেকেই আপডেট ব্যবহারকারীর ফোনে পৌঁছায়।","না দিলে পুরোনো অ্যাপই থাকবে।","✅ Test and release → Production (বা Testing) → Create new release → নতুন AAB দিন → Save → Send for review।\n⛔ রিভিউ চলাকালীন আবার বদলাবেন না।","PR"]];
+var TL={
+CH:function(c,ok){ok.disabled=!D.ch;var a=E("button","s","🌐 শুধু সাইটের ভেতরের কিছু বদলিয়েছি"),b=E("button","s","📦 আইকন, নাম বা manifest বদলিয়েছি");var sh=function(){a.classList.toggle("on",D.ch==="site");b.classList.toggle("on",D.ch==="pkg");ok.disabled=!D.ch};a.onclick=function(){D.ch="site";D[4]=D[5]=D[6]=true;sv();sh()};b.onclick=function(){D.ch="pkg";delete D[4];delete D[5];delete D[6];sv();sh()};c.appendChild(a);c.appendChild(b);sh()},
+SW:function(c,ok){var i=inp("এখনকার নাম, যেমন canva-sohoj-v2","cn",function(){u()});c.appendChild(i);var r=st(c,"wn","");var u=function(){var n=nx(D.cn);D.nn=n;sv();r.className="r "+(n?"ok":"wn");r.textContent=n?"নতুন নাম: "+n:"এখনকার নাম বসান।";ok.disabled=!n};cb(c,"নতুন নাম কপি করুন",function(){return D.nn||""});u()},
+UG:function(c,ok){var u=inp("ইউজারনেম","gu",function(){l()}),r=inp("repository-র নাম","gr",function(){l()});c.appendChild(u);c.appendChild(r);var a=lk("⬆️ তোলার পাতা খুলুন","#");c.appendChild(a);var l=function(){a.href="https://github.com/"+(D.gu||"")+"/"+(D.gr||"")+"/upload/main"};l()},
+VS:function(c,ok){var i=inp("https://আপনার-নাম.github.io/সাইট/","su");c.appendChild(i);var o=E("div"),b=E("button","s","🔎 যাচাই করুন");c.appendChild(b);c.appendChild(o);ok.disabled=true;
+b.onclick=async function(){o.innerHTML="";var u=D.su||"";if(!/^https:\/\//i.test(u)){st(o,"no","✖ লিংক https:// দিয়ে শুরু হবে");return}if(!/\/$/.test(u))u+="/";try{var r=await fetch(u+"sw.js?x="+Date.now(),{cache:"no-store"});if(!r.ok)throw 0;var t=await r.text();var m=/["']([A-Za-z0-9_-]+-v\d+)["']/.exec(t);if(!m){st(o,"wn","⚠ sw.js পাওয়া গেছে, কিন্তু সংস্করণের নাম পড়তে পারিনি।");return}var g=m[1]===D.nn;st(o,g?"ok":"no",g?"✔ নতুন সংস্করণ চালু: "+m[1]:"✖ সাইটে এখনো "+m[1]+" আছে। নতুন নাম: "+D.nn);ok.disabled=!g}catch(e){st(o,"no","✖ sw.js খুলতে পারিনি। লিংক ও ফাইল দেখুন।")}}},
+VC:function(c,ok){var i=inp("আগের Version code, যেমন 1","vc",function(){u()});c.appendChild(i);var r=st(c,"wn","");var u=function(){var n=parseInt(D.vc,10);r.className="r "+(n>0?"ok":"wn");r.textContent=n>0?"নতুন Version code: "+bn(n+1):"আগের সংখ্যাটা লিখুন।";ok.disabled=!(n>0)};cb(c,"নতুন সংখ্যা কপি করুন",function(){return String(parseInt(D.vc,10)+1)});u()},
+KY:function(c,ok){var k=D.ky=D.ky||[];var T=["আগের কী ফাইল (.keystore) আমার কাছে আছে","কী-র পাসওয়ার্ড ও alias আমার জানা আছে","PWABuilder-এ ‘Use mine’ বেছে সেই কী দিয়েছি"];var u=function(){ok.disabled=!T.every(function(_,j){return k[j]});sv()};T.forEach(function(t,j){var lb=E("label","k"),x=E("input");x.type="checkbox";x.checked=!!k[j];x.onchange=function(){k[j]=x.checked;u()};lb.appendChild(x);var sp=E("span");sp.textContent=t;lb.appendChild(sp);c.appendChild(lb)});u()},
+PR:function(c,ok){c.appendChild(lk("🏪 Play Console খুলুন","https://play.google.com/console"))}};
+
+
+function go(){var done=S.filter(function(_,i){return D[i]}).length,pc=Math.round(done*100/S.length);
+document.getElementById("pc").textContent=bn(pc)+"%";document.getElementById("pt").textContent="✔ "+bn(done)+" শেষ · ⏳ "+bn(S.length-done)+" বাকি";document.getElementById("pi").style.width=pc+"%";
+cur=S.findIndex(function(_,i){return!D[i]});var ds=document.getElementById("ds");ds.innerHTML="";S.forEach(function(_,i){ds.appendChild(E("span",D[i]?"d":i===cur?"n":""))});
+var v=document.getElementById("v");v.innerHTML="";
+if(cur<0){var f=E("div","c");f.appendChild(E("h1","","আলহামদুলিল্লাহ 🎉"));f.appendChild(E("p","",DONE));v.appendChild(f);document.getElementById("bk").style.display="";return}
+var s=S[cur],c=E("div","c"),ok=E("button","g","✔ হয়ে গেছে");
+c.appendChild(E("div","m","ধাপ "+bn(cur+1)+" / "+bn(S.length)));c.appendChild(E("h1","",s[0]));
+[["🎯 কেন করতে হবে",s[1],"s1"],["⛔ না করলে কী হবে",s[2],"s2"],["⭐ কোনটা ভালো, কোনটা ভালো না",s[3],"s3"]].forEach(function(q){var b=E("div","sb "+q[2]);b.appendChild(E("em","",q[0]));b.appendChild(document.createTextNode(q[1]));c.appendChild(b)});
+ok.onclick=function(){D[cur]=true;sv();go();scrollTo(0,0)};
+if(s[4]&&TL[s[4]])TL[s[4]](c,ok);c.appendChild(ok);
+v.appendChild(c);document.getElementById("bk").style.display=cur>0?"":"none"}
+document.getElementById("bk").onclick=function(){var i=cur<0?S.length:cur;if(i>0){delete D[i-1];sv();go();scrollTo(0,0)}};
+(function(){var r=document.documentElement,f=r.requestFullscreen||r.webkitRequestFullscreen,n=0,fb=document.getElementById("fs");
+function on(){return document.fullscreenElement||document.webkitFullscreenElement}
+function af(){if(!f||on()||n++>30)return;try{var p=f.call(r);if(p&&p.catch)p.catch(function(){})}catch(e){}}
+function sync(){if(fb)fb.style.display=(!f||on())?"none":""}
+["click","touchend","pointerup"].forEach(function(e){document.addEventListener(e,af)});
+if(fb)fb.onclick=function(ev){ev.stopPropagation();n=0;af()};
+document.addEventListener("fullscreenchange",sync);document.addEventListener("webkitfullscreenchange",sync);sync()})();
+go();
+if("serviceWorker" in navigator&&location.protocol.indexOf("http")===0){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}
+
+</script></body></html>
